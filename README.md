@@ -1,43 +1,59 @@
-# 📝 React To-Do List App
-A todo app, which handles a basic, add, remove and an input part of the app, where you can render, edit and delete the items.
+# 🛍️ ShoppyGlobe – E-commerce App
+
+## 📖 Description
+
+ShoppyGlobe is a beginner-friendly e-commerce web app built with modern frontend tools. It lets users browse products, view detailed information, add items to the cart, modify cart quantities, and place orders. The app dynamically updates item quantities and calculates the total value during checkout.
+
+---
+
+## ⚙️ Tech Stack
+
+- **React** – Component-based UI
+- **React Router** – Client-side routing
+- **Redux Toolkit** – Global state management
+- **JavaScript** – App logic
+- **CSS** – Basic styling
+- **Vite** – Fast bundler and dev server
+
+---
 
 ## 🚀 Features
 
-- ✅ **Add Tasks** — input field to type in the name of the task and an Add button to add the task.
-- ✅ **Editing Tasks** — Click "Edit", to modify the task, and click save to save the changes.
-- ✅ **Delete Tasks** — Remove tasks with a single click.
-- ✅ **On Completion** — Click on a task to mark it as done (strike-through).
-- ✅ **Responsive UI** — Styled using CSS with animations and gradients.
+- 🏠 **Home Page** with searchable product list  
+- 📦 **Product Detail Page** using dynamic routes (`/product/:id`)  
+- 🛒 **Shopping Cart** with quantity update and removal  
+- ✅ **Checkout Page** to review and place orders  
+- ⚙️ **Redux Toolkit** for centralized state handling  
+- 🧭 **Client-side Routing** with React Router  
+- 🌐 **Real Data** from [DummyJSON API](https://dummyjson.com/)  
+- 💡 **Responsive and Clean UI**  
 
 ---
 
-## 🧠 Tech Stack
+## 📂 Folder Structure
 
-- **React** (Functional Components)
-- **React Hooks** (`useState`, `useRef`)
-- **CSS** for styling and animations
-- **Vite** as the build tool 
-
----
-
-## 📂 Project Structure
-├── App.jsx # Main component
-├── App.css # Styling
-└── Components
-    ├── Header.jsx # Title/Header
-    ├── ToDoList.jsx # List container
-    └── ToDoItem.jsx # Single task item
+src/
+├── components/ # Reusable UI components
+├── pages/ # Route-specific pages (Home, Product, Cart, etc.)
+├── hooks/ # Custom React hooks
+├── Utils/ # Redux store and slices
+├── App.jsx # Root layout with <Outlet />
+├── main.jsx # App entry with store & router setup
+└── App.css # Styling
 
 
 ---
 
-## 💻 How to Run Locally
+## 🛠️ Installation & Usage
 
-1. **Clone the repository**  
 ```bash
-git clone https://github.com/your-username/todo-app.git
+# Clone this repository
+git clone https://github.com/AbhijitMishra10/ShoppyGlobal.git
 
-cd todo-app
+cd ShoppyGlobal
+
+# Install dependencies
 npm install
+
+# Start the development server
 npm run dev
-Open http://localhost:5173 in your browser to see it live!

@@ -1,16 +1,16 @@
-import express, { json } from 'express'
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import cors from 'cors'
-
+import express, { json } from 'express' // Importing express to create the server
+import mongoose from 'mongoose' // Importing mongoose to interact with MongoDB
+import dotenv from 'dotenv' // Importing dotenv to manage environment variables
+import cors from 'cors' // Importing cors to handle cross-origin requests
+// Importing the routes for products, authentication, and cart
 import productsRouter from './routes/products.js'
 import authRouter from './routes/auth.js'
 import cartRouter from './routes/cart.js'
-
+// Loading environment variables from .env file
 dotenv.config()
 // Creating new instances of express
 const app = new express()
-app.use(cors({origin: 'http://localhost:5175', credentials: true}))
+app.use(cors({origin: process.env.FRONTEND_URL || 'http://localhost:5174', credentials: true}))
 app.use(express.json()) //For parsing the unparsed data
 // Defining the paths/routes for getting to certain part of the app
 app.use("/api/products", productsRouter)

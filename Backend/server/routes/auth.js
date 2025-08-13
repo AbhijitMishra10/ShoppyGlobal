@@ -9,7 +9,7 @@ router.post("/register", async(req, res) => {
     // Destructuring name, email, and password from request body
     const {name, email, password} = req.body
     // Validating essential fields
-    if(!email || !password) {
+    if(!name.trim() || !email.trim() || !password.trim()) {
         return res.status(400).json({message: "Missing essential fields"})
     }
     // Checking if the user already exists
@@ -40,7 +40,7 @@ router.post("/login", async(req, res) => {
         const user = await User.findOne({email})
         // If user does not exist or password does not match, return an error
         if(!user || user.password !== password) {
-            return res.status(400).json({message: "Invalid Credentials"})       
+            return res.status(401).json({message: "Invalid Credentials"})       
         }
         // Generating a JWT token for the user
     const token = jwt.sign(

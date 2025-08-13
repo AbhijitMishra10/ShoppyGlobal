@@ -7,7 +7,8 @@ import Product from '../models/Product.js'
 import auth from '../middleware/auth.js'
 // Creating a router instance
 const router = express.Router()
-router.use(auth) // Applying authentication middleware to all routes in this file
+// Applying authentication middleware to all routes in this file
+router.use(auth) 
 // Get Cart
 router.get("/", async(req, res) => {
    try{ const cart = await Cart.findOne({user: req.user.userId}).populate('items.product') // Populating product details in the cart items

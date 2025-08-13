@@ -6,14 +6,21 @@ import ProductItem from './ProductItem' //Component to render individual product
 function ProductList() {
   // Get product data and any potential fetch error
   const {products, error} = useFetchProducts()
-  //State to manage search input value
   const[search, setSearch] = useState('')
-  // Filter products based on the search input (case-insensitive match)
-  const filtered = products.filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
+
   //If there's an error in fetching products, displays it  
   if(error) return <p>Error: {error}</p>
+
   // If products haven't loaded yet, show loading text
-  if(!products.length) return <p>Loading...</p>
+  if(!products) {
+    return <p>Loading Products..</p>
+  }
+  
+  //State to manage search input value
+  // Filter products based on the search input (case-insensitive match)
+  const filtered = products.filter(product => product.name?.toLowerCase().includes(search.toLowerCase())) 
+  
+  if(filtered.length === 0) return <p>No products found</p>
   // Render search bar and filtered product grid
   return (
     <div>

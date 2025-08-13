@@ -6,7 +6,7 @@ function Cart() {
   //Use selector is used here to access the cart items from Redux store
   const items = useSelector((state) => state.cart.items)
   // If the cart is empty, this will show a message of 'Your cart is Empty'
-  if(!items.length) return <p>Your cart is empty 🛒</p>
+  if(!items.length) return <h2>Your cart is empty 🛒</h2>
   // If the cart has items, it will render them using the CartItem component
   return (
     <div className='Cart'>

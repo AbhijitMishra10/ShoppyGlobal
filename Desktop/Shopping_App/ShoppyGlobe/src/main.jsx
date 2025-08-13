@@ -10,14 +10,13 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 // Lazy loading and fallback
 import { lazy, Suspense } from 'react'
-// Import NotFound page directly (not lazy since it's small and used for fallback)
-import NotFound from './Components/NotFound.jsx'
 // Redux store setup
 import store from './Utils/store.js'
 import { Provider } from 'react-redux'
 // Lazy-loaded route components
-import CheckoutPage from './pages/CheckoutPage.jsx'
-import IntroPage from './pages/IntroPage.jsx'
+const CheckoutPage = lazy(() => import('./pages/CheckoutPage.jsx'))
+const IntroPage = lazy(() => import('./pages/IntroPage.jsx'))
+const NotFound = lazy(() => import('./Components/NotFound.jsx'))
 const Home = lazy(() => import('./pages/Home.jsx'))
 const ProductPage = lazy(() => import('./pages/ProductPage.jsx'))
 const CartPage = lazy(() => import('./pages/CartPage.jsx'))
@@ -73,8 +72,20 @@ const router = createBrowserRouter([
         )
       },
       {
+        path: 'Intro',
+        element: (
+          <Suspense fallback={<div>Loading Intro...</div>}>
+            <IntroPage/>
+          </Suspense>
+        )
+      },
+      {
         path: '*',
-        element: <NotFound/>
+        element: (
+          <Suspense fallback={<div>Loading Not Found...</div>}>
+            <NotFound/>
+          </Suspense>
+        )
       }
     ]
   },

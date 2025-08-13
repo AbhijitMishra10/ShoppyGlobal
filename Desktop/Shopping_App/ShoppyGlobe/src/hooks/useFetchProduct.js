@@ -10,12 +10,12 @@ function useFetchProducts() {
     // UseEffect runs only once on component mount as there is an empty dependency array
     useEffect(() => {
         // Fetch data from DummyJSON API
-        fetch('https://dummyjson.com/products')
+        fetch('http://localhost:5001/api/products')
             .then((res) => {
                 if(!res.ok) throw new Error('Failed to fetch products') //Manual error throw if response isn't OK 
                 return res.json()
             })
-            .then((data) => setProducts(data.products)) //Set products into state
+            .then((data) => setProducts(data)) //Set products into state
             .catch((err) => setError(err.message)) // Handle and store fetch error
     }, [])
     // Returns both products and error so other components can use them

@@ -2,7 +2,20 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #392e55, #e9e4f0)
+    background: linear-gradient(135deg, #392e55, #e9e4f0);
+    background-size: 200% 200%;
+    animation: gradientShift 10s ease-in-out infinite;
+}
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 header {
@@ -12,10 +25,12 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: linear 0.5s ease;
 }
 
 header:hover {
     background-color: #000000e8;
+    
 }
 
 nav a {
@@ -23,10 +38,25 @@ nav a {
     margin: 0 0.5rem;
     text-decoration: none;
     font-size: 1.2rem;
+    position: relative;
+    transition: color 0.3s ease;
 }   
-
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: gold;
+    bottom: -2px;
+    left: 0;
+    transition: width 0.3s ease;
+}
 nav a:hover {
     font-weight: 600;
+    color: gold;
+}
+nav a:hover::after {
+    width: 100%;
 }
 
 input[type='text'] {
@@ -35,10 +65,12 @@ input[type='text'] {
     width: 80%;
     max-width: 400px;
     font-size: 15px;
+    transition: all 0.3s ease;
 }
 
 input[type='text']:focus {
     font-weight: bold;
+    box-shadow: 0px 0p 8px rgba(0, 124, 255, 0.5);
 }
 
 div {
@@ -48,6 +80,10 @@ div {
 img {
     border-radius: 8px;
     margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+img:hover {
+    transform: scale(1.05);
 }
 
 button {
@@ -58,10 +94,12 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease; 
 }
 
 button:hover {
     background-color: #0d3c6e;
+    transform: translateY(-3px);
 }
 
 @media screen and (max-width: 600px) {

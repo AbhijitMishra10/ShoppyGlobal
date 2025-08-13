@@ -20,7 +20,7 @@ function CheckoutPage() {
   }
   // Move to the home page upon order cancellation
   function CancelOrder() {
-    let response = confirm('Are you sure you want to cancel ypur order')
+    let response = confirm('Are you sure you want to cancel your order')
     if(response) {
       dispatch(clearCart())
       navigate('/home')

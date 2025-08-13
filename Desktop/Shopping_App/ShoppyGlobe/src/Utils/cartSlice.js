@@ -10,7 +10,7 @@ const cartSlice = createSlice({
         // Add a product to the cart
         addToCart: (state,action) => {
             const product = action.payload
-            const existing = state.items.find(item => item.id === product.id)
+            const existing = state.items.find(item => item.id === product._id)
             if(existing) {
                 // If product already exists in cart, increase quantity
                 existing.quantity += 1
@@ -26,7 +26,7 @@ const cartSlice = createSlice({
             if (item) {
                 if(item.quantity > 1) {
                     // If more than one item exists, just decrease the quantity
-                    item.quantity -= 1
+                    item.quantity = 0
                 } else {
                     // If only one item exists, remove it from the cart
                     state.items = state.items.filter(item => item.id !== id)

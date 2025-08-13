@@ -11,18 +11,29 @@ function ProductDetail() {
   const dispatch = useDispatch()
 
   const cartItems = useSelector(state => state.cart.items)
-  const currentItem = cartItems.find(item => item.id === Number(id))
+  const currentItem = cartItems.find(item => item.id === id)
   const quantity = currentItem ? currentItem.quantity : 0
   // Fetch product details from the API whenever the 'id' changes
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/${id}`)
+    let isMounted = true; // Flag to check if component is mounted
+    fetch(`http://localhost:5001/api/products/${id}`)
       .then((res) => {
         if(!res.ok) throw new Error("Product not found😞");
           return res.json()
       })
-      .then((data) => setProduct(data)) //Save product data to state
-      .catch((err) => setError(err.message)) //Catch and store any error message
-  },[id])
+      .then((data) => { 
+        if(isMounted) 
+        setProduct(data) 
+        }) //Save product data to state
+      .catch((err) =>{
+        if(isMounted) 
+        setError(err.message)
+      }) //Catch and store any error message
+  
+      return () => {
+        isMounted = false; // Cleanup function to avoid memory leaks
+      }  
+    },[id])
   // If there's an error, display it
   if (error) return <p>Error: {error}</p>
   // Show a loading message while product data is being fetched
@@ -31,13 +42,13 @@ function ProductDetail() {
   return (
     <div>
       <h3>
-        {product.title}
+        {product.name}
       </h3>
-      <img src={product.thumbnail} alt={product.title} width='200'/>
+      <img src={product.image} alt={product.image} width='200'/>
       <p>{product.description}</p>
       <p>₹{product.price}</p>
-      <button onClick={() => dispatch(addToCart(product))}>Add to cart</button>
-      <button onClick={() => dispatch(removeFromCart(product.id))} style={{marginLeft: '5px'}} disabled={quantity === 0}>Remove from Cart</button>
+      <button onClick={() => dispatch(addToCart({...product, id: product._id}))}>Add to cart</button>
+      <button onClick={() => dispatch(removeFromCart(product._id))} style={{marginLeft: '5px'}} disabled={quantity === 0}>Remove from Cart</button>
       {quantity > 0 && (
         <span style={{ marginLeft: '0.5rem', fontWeight: 'bold', color: '#0074D9'}}>🛒x{quantity}</span>
       )}

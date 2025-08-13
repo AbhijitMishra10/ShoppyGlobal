@@ -12,7 +12,7 @@ function CartItem({item}) {
   return (
     <div>
       {/* Shows the title of the item */}
-      <h4><u>{item.title}</u></h4> 
+      <h4><u>{item.name}</u></h4> 
       {/* Shows the price and the number of additions of the item */}
       <p style={{fontSize: 'large', color: 'black'}}>₹{item.price} x {item.quantity} <span style={{display: 'flex', flexDirection: 'row-reverse', fontSize: 'large'}}>Item Total</span><span style={{display: 'flex', flexDirection: 'row-reverse'}}>₹{itemPrice}</span></p>
       {/* Removes items from the list one by one, on clicking of the button */}
